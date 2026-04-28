@@ -8,7 +8,8 @@
       "PowerShell(cmd /c \"curl http://localhost:3000 -s --max-time 10 -o C:\\\\dev\\\\soy-feed-platform\\\\test2.html 2>&1\"; Get-Content \"C:\\\\dev\\\\soy-feed-platform\\\\dev-output.txt\" -Tail 10)",
       "PowerShell(Get-Process *)",
       "Bash(git add *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(npm run *)"
     ]
   }
 }

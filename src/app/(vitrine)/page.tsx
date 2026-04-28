@@ -90,7 +90,7 @@ export default async function HomePage() {
         <div className="absolute left-0 top-0 bottom-0 w-1 bg-brand-gold" />
 
         <div className="relative max-w-6xl mx-auto px-6 py-24 w-full">
-          <p className="text-brand-gold text-xs font-semibold uppercase tracking-[0.25em] mb-6 font-sans">
+          <p className="text-white/80 text-xs font-semibold uppercase tracking-[0.25em] mb-6 font-sans">
             Production & Distribution · Algérie
           </p>
           <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] mb-6 max-w-3xl">

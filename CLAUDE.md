@@ -9,9 +9,9 @@ Phase 1: Public vitrine + admin dashboard for daily price updates.
 Phase 2 (future, designed but not built): Client portal with custom negotiated prices.
 
 ## Tech Stack (LOCKED — do not change)
-- Next.js 15+ with App Router
+- Next.js 16+ with App Router
 - TypeScript
-- Tailwind CSS
+- Tailwind CSS v4 (config lives in `src/app/globals.css`, there is no `tailwind.config.ts`)
 - shadcn/ui for admin components
 - Supabase (cloud) for database + auth
 - Hosting target: Vercel
@@ -82,14 +82,20 @@ src/
 └── middleware.ts
 
 ## Current Status (where I am right now)
-- ✅ Next.js project created with src/, TypeScript, Tailwind, App Router
-- ✅ Packages installed: @supabase/supabase-js, @supabase/ssr, lucide-react
-- ✅ Supabase project created in cloud (free tier)
-- ✅ Database schema deployed (all tables, RLS, triggers, audit log)
-- ✅ Seed data inserted (5 products with today's prices)
+- ✅ Next.js + TypeScript + Tailwind v4 + App Router configured
+- ✅ Supabase client files in place (client, server, middleware, admin)
+- ✅ Database schema deployed: profiles, products, daily_prices, customer_prices,
+     price_audit_log, contact_messages — all tables, RLS, triggers, audit log
+- ✅ Seed data inserted (5 products with prices)
 - ✅ Admin user created and promoted to 'admin' role
-- ✅ .env.local file created with Supabase URL and keys
-- ⏳ NEXT: Create Supabase client files in src/lib/supabase/
+- ✅ Three-layer security in place (middleware + server guards + RLS)
+- ✅ Vitrine fully built: /, /produits, /prix, /a-propos, /services, /contact
+- ✅ Admin dashboard with price editor at /admin
+- ✅ Contact form backend wired up (writes to contact_messages via module)
+- ✅ Brand applied throughout: Atlantic name, colour palette, Playfair/Inter fonts
+- ✅ Auth flow: /login, /logout, middleware redirect, requireStaff() guard
+- ✅ Client portal scaffolded at /portal (Phase 2 — not yet built)
+- ⏳ NEXT: TBD — Phase 1 is feature-complete for demo
 
 ## Working Style I Want
 1. Build module by module, not all at once
