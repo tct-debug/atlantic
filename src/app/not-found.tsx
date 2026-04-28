@@ -5,7 +5,7 @@ export default function NotFound() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-6">
       <div className="text-center">
         <p className="text-xs font-semibold uppercase tracking-widest text-green-700 mb-4">
-          AgriGrain Algérie
+          Atlantic
         </p>
         <h1 className="text-7xl font-bold text-gray-900 mb-2">404</h1>
         <p className="text-gray-500 mb-8">Cette page n'existe pas.</p>

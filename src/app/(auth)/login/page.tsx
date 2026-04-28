@@ -36,7 +36,7 @@ export default function LoginPage() {
         <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-8">
           <div className="mb-6">
             <p className="text-xs font-semibold uppercase tracking-widest text-green-700 mb-1">
-              AgriGrain Algérie
+              Atlantic
             </p>
             <h1 className="text-2xl font-bold text-gray-900">Connexion</h1>
           </div>

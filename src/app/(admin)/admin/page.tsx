@@ -38,7 +38,7 @@ export default async function AdminPage() {
         <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-green-700">
-              AgriGrain Algérie
+              Atlantic
             </p>
             <h1 className="text-lg font-bold text-gray-900">Tableau de bord</h1>
           </div>
