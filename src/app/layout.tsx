@@ -1,15 +1,28 @@
 import type { Metadata } from 'next'
+import { Playfair_Display, Inter } from 'next/font/google'
 import './globals.css'
 
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-playfair',
+  display: 'swap',
+})
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
-  title: 'AgriGrain Algérie',
-  description: 'Prix des céréales et aliments du bétail en temps réel',
+  title: 'Atlantic — Aliments du bétail',
+  description: "L'excellence au service de l'élevage algérien. Production et distribution de céréales et aliments du bétail.",
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className="h-full">
-      <body className="min-h-full antialiased">{children}</body>
+    <html lang="fr" className={`${playfair.variable} ${inter.variable} h-full`}>
+      <body className="min-h-full antialiased font-sans">{children}</body>
     </html>
   )
 }
