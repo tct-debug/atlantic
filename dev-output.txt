@@ -1,0 +1,64 @@
+
+> soy-feed-platform@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.4 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://10.111.230.42:3000
+- Environments: .env.local
+✓ Ready in 894ms
+
+ GET / 200 in 767ms (next.js: 431ms, application-code: 336ms)
+ GET / 200 in 59ms (next.js: 5ms, application-code: 54ms)
+ GET / 200 in 70ms (next.js: 5ms, application-code: 65ms)
+ GET / 200 in 83ms (next.js: 4ms, application-code: 79ms)
+Error: ENOENT: no such file or directory, scandir 'C:\dev\soy-feed-platform\app'
+    at ignore-listed frames {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: 'C:\\dev\\soy-feed-platform\\app'
+}
+⨯ unhandledRejection: Error: ENOENT: no such file or directory, scandir 'C:\dev\soy-feed-platform\app'
+    at ignore-listed frames {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: 'C:\\dev\\soy-feed-platform\\app'
+}
+⨯ unhandledRejection:  Error: ENOENT: no such file or directory, scandir 'C:\dev\soy-feed-platform\app'
+    at ignore-listed frames {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: 'C:\\dev\\soy-feed-platform\\app'
+}
+✓ Compiled in 4.6s
+Error: ENOENT: no such file or directory, scandir 'C:\dev\soy-feed-platform\app'
+    at ignore-listed frames {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: 'C:\\dev\\soy-feed-platform\\app'
+}
+Error: ENOENT: no such file or directory, scandir 'C:\dev\soy-feed-platform\app'
+    at ignore-listed frames {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: 'C:\\dev\\soy-feed-platform\\app'
+}
+Error: ENOENT: no such file or directory, scandir 'C:\dev\soy-feed-platform\app'
+    at ignore-listed frames {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: 'C:\\dev\\soy-feed-platform\\app'
+}
+Error: ENOENT: no such file or directory, scandir 'C:\dev\soy-feed-platform\app'
+    at ignore-listed frames {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: 'C:\\dev\\soy-feed-platform\\app'
+}

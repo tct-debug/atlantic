@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Start-Sleep -Seconds 5; try { $r = Invoke-WebRequest -Uri \"http://localhost:3000\" -TimeoutSec 10 -ErrorAction Stop; \"Status: $\\($r.StatusCode\\)\"; $r.Content.Substring\\(0, 300\\) } catch { \"Error: $_\" })",
+      "PowerShell(http_code *)",
+      "PowerShell(if \\(Test-Path \"C:\\\\dev\\\\soy-feed-platform\\\\test-response.html\"\\) { \\(Get-Content \"C:\\\\dev\\\\soy-feed-platform\\\\test-response.html\" -Raw\\).Substring\\(0, 500\\) } else { \"File not found\" })",
+      "PowerShell(cmd /c \"curl http://localhost:3000 -s --max-time 10 -o test.html\" 2>&1; if \\(Test-Path \"test.html\"\\) { $c = Get-Content \"test.html\" -Raw; $c.Substring\\(0, [Math]::Min\\(800, $c.Length\\)\\) } else { \"failed\" })",
+      "PowerShell(cmd /c \"curl http://localhost:3000 -s --max-time 10 -o C:\\\\dev\\\\soy-feed-platform\\\\test2.html 2>&1\"; Get-Content \"C:\\\\dev\\\\soy-feed-platform\\\\dev-output.txt\" -Tail 10)",
+      "PowerShell(Get-Process *)"
+    ]
+  }
+}
