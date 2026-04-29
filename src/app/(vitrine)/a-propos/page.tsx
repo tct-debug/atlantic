@@ -14,18 +14,18 @@ const VALUES = [
   {
     icon: Users,
     title: 'Proximité',
-    body: 'Nous accompagnons chaque éleveur avec des conseils personnalisés. Notre équipe technique est disponible pour répondre à toutes vos questions.',
+    body: 'Nous accompagnons chaque acheteur avec des conseils personnalisés. Notre équipe est disponible pour répondre à toutes vos questions.',
   },
   {
     icon: Leaf,
     title: 'Durabilité',
-    body: 'Engagés pour une agriculture algérienne durable, nous privilégions les pratiques respectueuses de l\'environnement et du bien-être animal.',
+    body: 'Engagés pour une agriculture algérienne durable, nous privilégions les pratiques respectueuses de l\'environnement et des ressources naturelles.',
   },
 ]
 
 const STATS = [
   { value: '2009', label: 'Année de création' },
-  { value: '5+', label: 'Gammes de produits' },
+  { value: '100%', label: 'Origine algérienne' },
   { value: '48', label: 'Wilayas desservies' },
   { value: '500+', label: 'Clients actifs' },
 ]
@@ -59,17 +59,17 @@ export default function AProposPage() {
           </h2>
           <div className="space-y-4 text-brand-charcoal/70 leading-relaxed font-sans text-sm">
             <p>
-              Fondée en 2009, Atlantic est née de la conviction que les éleveurs algériens
-              méritaient un partenaire local capable de leur fournir des aliments de qualité
-              supérieure, produits et formulés sur le sol algérien.
+              Fondée en 2009, Atlantic est née de la conviction que les acheteurs algériens
+              méritaient un partenaire local capable de leur fournir des céréales et des
+              produits du soja de qualité supérieure.
             </p>
             <p>
-              Depuis plus de 15 ans, nous nous sommes spécialisés dans la production et la
-              distribution de céréales, sons, farines et aliments composés pour bovins, ovins,
-              volailles et équidés.
+              Depuis plus de 15 ans, nous nous sommes spécialisés dans le négoce et la
+              distribution de maïs, orge, soja et coque de soja, pour les besoins des
+              industries agroalimentaires, des minoteries et des opérateurs de l&apos;élevage.
             </p>
             <p>
-              Aujourd&apos;hui, Atlantic approvisionne plus de 500 éleveurs dans l&apos;ensemble des
+              Aujourd&apos;hui, Atlantic approvisionne plus de 500 clients dans l&apos;ensemble des
               48 wilayas, avec une chaîne logistique robuste et des prix mis à jour chaque jour.
             </p>
           </div>
@@ -78,7 +78,7 @@ export default function AProposPage() {
         {/* Decorative */}
         <div className="bg-brand-wheat rounded-2xl p-10 border border-brand-wheat">
           <blockquote className="font-serif text-2xl font-bold text-brand-charcoal leading-snug mb-6">
-            &ldquo;L&apos;excellence au service de l&apos;élevage algérien.&rdquo;
+            &ldquo;Votre partenaire en céréales et produits du soja.&rdquo;
           </blockquote>
           <div className="w-10 h-0.5 bg-brand-gold mb-4" />
           <p className="text-sm text-brand-charcoal/50 font-sans">Notre raison d&apos;être depuis 2009</p>
@@ -135,9 +135,9 @@ export default function AProposPage() {
             Contribuer à la souveraineté alimentaire de l&apos;Algérie
           </h2>
           <p className="text-brand-charcoal/60 leading-relaxed font-sans">
-            Chaque jour, Atlantic œuvre pour que les éleveurs algériens puissent compter
+            Chaque jour, Atlantic œuvre pour que les acheteurs algériens puissent compter
             sur des approvisionnements réguliers, des prix transparents et un service
-            irréprochable. Parce qu&apos;une agriculture forte, c&apos;est une Algérie forte.
+            irréprochable. Parce qu&apos;une filière céréalière forte, c&apos;est une Algérie forte.
           </p>
         </div>
       </section>

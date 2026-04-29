@@ -1,113 +1,189 @@
-# Project: Soy & Feed Platform
+# Project: Atlantic — Cereal & Soy Products Platform
 
 ## Business Context
-A vitrine (showcase) website + admin dashboard for a cereal and livestock feed
-production company in Algeria. Sells soy, bran, corn, raw materials.
+Atlantic is an Algerian company specialising in cereals and soy products.
+Currently sells: maïs (corn), orge (barley), soja (soybeans), coque de soja
+(soybean hulls). More products may be added over time.
 
-## Current Phase
-Phase 1: Public vitrine + admin dashboard for daily price updates.
-Phase 2 (future, designed but not built): Client portal with custom negotiated prices.
+The company has two customer types:
+- General market customers who see **public prices** on the vitrine
+- Contracted clients who get **negotiated prices** via a private client portal (Phase 2)
 
-## Tech Stack (LOCKED — do not change)
-- Next.js 16+ with App Router
-- TypeScript
-- Tailwind CSS v4 (config lives in `src/app/globals.css`, there is no `tailwind.config.ts`)
-- shadcn/ui for admin components
-- Supabase (cloud) for database + auth
-- Hosting target: Vercel
+## Tech Stack (current — do not change unless asked)
+- **Next.js 16.2.4** with App Router
+- **React 19.2.4**
+- **TypeScript**
+- **Tailwind CSS v4** — config lives in `src/app/globals.css`. There is NO
+  `tailwind.config.ts` (it does not exist). Do not create one.
+- **shadcn/ui** — style: `base-nova`, baseColor: `neutral`
+- **Supabase** (cloud) — Postgres, Auth, RLS
+- **Hosting target**: Vercel (not yet deployed)
+- **Routing**: `src/proxy.ts` (Next.js 16 convention — this replaces the
+  `src/middleware.ts` used in older Next.js versions; do not create or rename)
 
-## Architecture Rules (CRITICAL)
-1. **Modularity**: Business logic lives in `src/lib/modules/` organized by domain
-   (prices, products, client-pricing). Components and pages NEVER write SQL or
-   Supabase queries inline — they import from modules.
+## Current Status — what is actually built
+- ✅ Public vitrine fully built and styled (Atlantic brand, grain/soy positioning)
+- ✅ Pages: `/` (homepage), `/produits`, `/prix`, `/a-propos`, `/services`, `/contact`
+- ✅ Sticky header with French nav, footer with company info
+- ✅ Public daily prices visible to all visitors via `current_prices` view
+- ✅ Admin login at `/login` (Supabase Auth)
+- ✅ Admin dashboard at `/admin` — price editor tab + clients tab
+- ✅ Three-layer security: `src/proxy.ts` redirect + `requireStaff()` / `requireClient()` guards + RLS
+- ✅ Audit log via DB triggers on price changes
+- ✅ Auth routing: `/auth/redirect` reads role → staff go to `/admin`, clients go to `/portal`
+- ✅ Client portal at `/portal` — shows negotiated prices per client
+- ✅ Admin can create client accounts and assign per-product negotiated prices
+- ✅ Product catalogue: Maïs, Orge, Soja, Coque de soja (migration 0003 applied)
+- ⚠️ Contact form UI exists at `/contact` but does NOT send email and has no backend storage
+  → `contact_messages` table was never created in Supabase
+  → Fix: wire up Resend for email delivery (next session)
 
-2. **Route groups for separation**:
-   - `(vitrine)` = public showcase site
-   - `(admin)` = secure admin dashboard at /admin
-   - `(client-portal)` = future client portal at /portal (scaffolded only)
-   - `(auth)` = shared login/logout flows
+## Architecture Rules — NON-NEGOTIABLE
 
-3. **Three-layer security**:
-   - Middleware redirects unauthenticated users from /admin
-   - Server Component guards verify role before rendering
-   - Supabase RLS policies enforce at the database level
+### 1. Modular business logic
+All Supabase queries go through `src/lib/modules/[domain]/queries.ts` or
+`mutations.ts`. **Never inline queries inside pages or components.**
 
-4. **Images**: Stored locally in `public/images/`, NOT in Supabase Storage.
-   Database stores file paths only.
+### 2. Server vs Client components
+Server Components are the default. Use Client Components only when truly needed
+(forms, interactivity, hooks). **Never import `src/lib/supabase/server.ts` into
+a Client Component** — it depends on `next/headers` and will break at runtime.
 
-5. **Components**:
-   - `components/vitrine/` = public-only
-   - `components/admin/` = admin-only
-   - `components/shared/` = used by both
-   - `components/ui/` = shadcn primitives
+### 3. No API routes by default
+This project uses Server Components and Server Actions instead of API routes.
+An `api/` directory does not exist and should not be created unless there is a
+specific need that cannot be met by Server Actions.
 
-## Database Schema (already deployed to Supabase)
-The full schema is in `supabase/migrations/0001_initial_schema.sql` — read this
-file as the source of truth for table names, column names, types, RLS policies,
-and helper functions.
+### 4. Route groups
+| Group | Path | Purpose |
+|---|---|---|
+| `(vitrine)` | `/` | Public showcase site |
+| `(admin)` | `/admin` | Atlantic staff dashboard |
+| `(auth)` | `/login`, `/logout` | Shared auth flows |
+| `(client-portal)` | `/portal` | Contracted clients (Phase 2) |
 
-Seed data for dev is in `supabase/seed.sql`.
+### 5. Component organisation
+```
+src/components/
+  vitrine/       ← public site only
+  admin/         ← admin dashboard only
+  client-portal/ ← client portal only (Phase 2)
+  ui/            ← shadcn primitives
+  shared/        ← used by multiple areas (create folder when first needed)
+```
+**Convention**: if a component is used by both vitrine AND admin/portal, place
+it in `src/components/shared/`. The folder does not exist yet — create it when
+the first shared component is needed.
 
-Key reference points:
-- Tables: profiles, products, daily_prices, customer_prices, price_audit_log
-- View: current_prices (latest price per active product, what the public site reads)
-- Helper function: is_staff() — returns true if current user has role 'admin' or 'employee'
-- Currency default: DZD
-- All tables have RLS enabled — code must respect these policies
-- Audit log is automatic via triggers on daily_prices and customer_prices
+### 6. Brand
+- **Company**: Atlantic
+- **Language**: French only — do NOT add multi-language support
+- **Colors**: primary `#1a3d2e` (deep green), accent `#c9a961` (gold),
+  cream `#faf8f3` (background), wheat `#e8dcc4` (surfaces),
+  charcoal `#2d2d2d` (body text), muted `#6b6b6b` (secondary text)
+- **Fonts**: Playfair Display (serif headings) + Inter (sans body)
+- **Currency**: DZD (Algerian Dinar)
+- **Mood**: Established, trustworthy, premium agricultural business
 
-## Folder Structure (target)
+## Actual File Structure (as of Phase 1 completion)
+```
 src/
 ├── app/
-│   ├── (vitrine)/         # public site
-│   ├── (admin)/admin/     # /admin dashboard
-│   ├── (client-portal)/   # future, scaffolded
-│   ├── (auth)/            # login/logout
-│   └── api/               # route handlers
+│   ├── (admin)/admin/page.tsx
+│   ├── (auth)/login/page.tsx
+│   ├── (auth)/logout/route.ts
+│   ├── (client-portal)/portal/page.tsx   ← scaffolded only
+│   ├── (vitrine)/
+│   │   ├── layout.tsx
+│   │   ├── page.tsx                      ← homepage
+│   │   ├── a-propos/page.tsx
+│   │   ├── contact/page.tsx
+│   │   ├── prix/page.tsx
+│   │   ├── produits/page.tsx
+│   │   └── services/page.tsx
+│   ├── globals.css                       ← Tailwind v4 config lives here
+│   ├── layout.tsx
+│   └── not-found.tsx
 ├── components/
-│   ├── ui/                # shadcn
-│   ├── vitrine/
-│   ├── admin/
-│   ├── client-portal/
-│   └── shared/
+│   ├── admin/price-editor.tsx
+│   ├── ui/                               ← shadcn primitives
+│   └── vitrine/
+│       ├── contact-form.tsx
+│       ├── footer.tsx
+│       ├── header.tsx
+│       └── product-grid.tsx
 ├── lib/
-│   ├── supabase/          # client.ts, server.ts, middleware.ts, admin.ts
-│   ├── auth/              # guards.ts, roles.ts
-│   ├── modules/           # business logic (queries, mutations, schemas, types)
+│   ├── auth/guards.ts                    ← contains requireStaff() only
+│   ├── modules/
+│   │   ├── client-pricing/              ← placeholder for Phase 2
+│   │   │   ├── queries.ts
+│   │   │   └── types.ts
+│   │   ├── contact/
+│   │   │   ├── mutations.ts
+│   │   │   ├── schemas.ts
+│   │   │   └── types.ts
 │   │   ├── prices/
-│   │   ├── products/
-│   │   └── client-pricing/  # placeholder for future
-│   └── utils/
-├── types/
-└── middleware.ts
+│   │   │   ├── mutations.ts
+│   │   │   ├── queries.ts
+│   │   │   ├── schemas.ts
+│   │   │   └── types.ts
+│   │   └── products/
+│   │       ├── queries.ts
+│   │       └── types.ts
+│   ├── supabase/
+│   │   ├── admin.ts
+│   │   ├── client.ts
+│   │   ├── server.ts
+│   │   └── session.ts                   ← used by src/proxy.ts
+│   └── utils.ts
+└── proxy.ts                              ← Next.js 16 routing/auth guard
+```
 
-## Current Status (where I am right now)
-- ✅ Next.js + TypeScript + Tailwind v4 + App Router configured
-- ✅ Supabase client files in place (client, server, middleware, admin)
-- ✅ Database schema deployed: profiles, products, daily_prices, customer_prices,
-     price_audit_log, contact_messages — all tables, RLS, triggers, audit log
-- ✅ Seed data inserted (5 products with prices)
-- ✅ Admin user created and promoted to 'admin' role
-- ✅ Three-layer security in place (middleware + server guards + RLS)
-- ✅ Vitrine fully built: /, /produits, /prix, /a-propos, /services, /contact
-- ✅ Admin dashboard with price editor at /admin
-- ✅ Contact form backend wired up (writes to contact_messages via module)
-- ✅ Brand applied throughout: Atlantic name, colour palette, Playfair/Inter fonts
-- ✅ Auth flow: /login, /logout, middleware redirect, requireStaff() guard
-- ✅ Client portal scaffolded at /portal (Phase 2 — not yet built)
-- ⏳ NEXT: TBD — Phase 1 is feature-complete for demo
+## Database Schema
+Source of truth: `supabase/migrations/0001_initial_schema.sql` and
+`supabase/migrations/0002_add_contact_messages.sql`
 
-## Working Style I Want
-1. Build module by module, not all at once
-2. Explain decisions briefly before writing code
-3. Show me the file structure changes before making them
-4. After each module, give me a way to test it
-5. Plain language, no unnecessary jargon
-6. I'm building this to demo to a client soon — prioritize a working demo over perfection
+| Table | Purpose |
+|---|---|
+| `profiles` | User metadata + role (`admin` / `employee` / `client`) |
+| `products` | Product catalogue |
+| `daily_prices` | Public daily prices (one per product per day) |
+| `customer_prices` | Per-client negotiated prices (Phase 2 — table exists, feature not built) |
+| `price_audit_log` | Automatic audit via DB triggers |
+| `contact_messages` | Contact form submissions |
 
-## Do NOT
-- Add features I didn't ask for
-- Change the tech stack
-- Skip the modular structure to "save time"
-- Use Supabase Storage for images (intentional decision)
-- Build the client portal yet (only scaffold the routes)
+**View**: `current_prices` — latest price per active product; this is what the
+public vitrine reads.
+
+**Function**: `is_staff()` — returns true if current user has role `admin` or
+`employee`. Used in RLS policies.
+
+All tables have RLS enabled. All code must respect these policies.
+
+## How Claude Code Should Work in This Project
+1. **Audit before action.** Read CLAUDE.md and relevant files first. Report
+   findings before changing anything.
+2. **Wait for approval.** After proposing a plan, wait for the user to confirm
+   before writing files.
+3. **Stay in scope.** Don't propose improvements, refactors, or features outside
+   what's asked.
+4. **Don't break what works.** `/admin`, `/login`, public price flow, and the
+   contact form must keep working after any change.
+5. **Suggest commits, don't run them.** Propose a commit message; let the user
+   run `git commit` themselves.
+6. **One task per session.** When a task is done, stop. Don't accumulate
+   unrelated changes.
+
+## Lessons Learned
+- Tailwind v4 moves config to CSS — don't look for or create `tailwind.config.ts`
+- Next.js 16 uses `src/proxy.ts` (not `src/middleware.ts`) — do not rename it
+- **Never** import `src/lib/supabase/server.ts` into a Client Component
+- Restart the dev server (`Ctrl+C`, `npm run dev`) when CSS or env changes
+  don't appear in the browser
+
+## Phase Roadmap
+| Phase | Status |
+|---|---|
+| Phase 1 — Public vitrine + admin price editor | COMPLETE |
+| Repositioning to grain/soy focus (fix stale copy) | PENDING — next session |
+| Phase 2 — Client portal with negotiated prices | NOT STARTED |

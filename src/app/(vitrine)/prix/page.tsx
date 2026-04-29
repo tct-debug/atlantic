@@ -7,11 +7,10 @@ export const revalidate = 60
 
 const CATEGORY_LABELS: Record<string, string> = {
   cereal: 'Céréales',
-  feed: 'Aliments du bétail',
-  raw_material: 'Matières premières',
+  soy: 'Produits du soja',
 }
 
-const CATEGORY_ORDER = ['cereal', 'feed', 'raw_material']
+const CATEGORY_ORDER = ['cereal', 'soy']
 
 function formatPrice(price: number): string {
   return new Intl.NumberFormat('fr-DZ').format(price)

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowRight, Wheat, Leaf, Package, CheckCircle2 } from 'lucide-react'
+import { ArrowRight, Wheat, Leaf, CheckCircle2 } from 'lucide-react'
 import { getActiveProducts } from '@/lib/modules/products/queries'
 import { getCurrentPrices } from '@/lib/modules/prices/queries'
 import type { Product } from '@/lib/modules/products/types'
@@ -17,21 +17,19 @@ const TRUST_STATS = [
 
 const CATEGORY_LABELS: Record<string, string> = {
   cereal: 'Céréales',
-  feed: 'Aliments du bétail',
-  raw_material: 'Matières premières',
+  soy: 'Produits du soja',
 }
 
 const CATEGORY_ICONS: Record<string, React.ReactNode> = {
   cereal: <Wheat className="w-7 h-7 text-brand-gold" />,
-  feed: <Leaf className="w-7 h-7 text-brand-gold" />,
-  raw_material: <Package className="w-7 h-7 text-brand-gold" />,
+  soy: <Leaf className="w-7 h-7 text-brand-gold" />,
 }
 
 const ABOUT_POINTS = [
-  'Production et transformation de céréales de qualité supérieure',
-  'Formulation d\'aliments adaptés aux besoins de chaque espèce',
+  'Production et sélection de céréales et produits du soja de qualité',
+  'Approvisionnement fiable en maïs, orge, soja et coque de soja',
   'Livraison rapide dans toutes les wilayas d\'Algérie',
-  'Équipe d\'experts en nutrition animale à votre service',
+  'Tarifs mis à jour chaque jour pour une totale transparence',
 ]
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -94,10 +92,10 @@ export default async function HomePage() {
             Production & Distribution · Algérie
           </p>
           <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] mb-6 max-w-3xl">
-            L&apos;excellence au service de l&apos;élevage algérien
+            Votre partenaire en céréales et produits du soja
           </h1>
           <p className="text-white/70 text-lg md:text-xl max-w-xl mb-10 leading-relaxed font-sans">
-            Atlantic produit et distribue des céréales et aliments du bétail de qualité
+            Atlantic produit et distribue des céréales et produits du soja de qualité
             supérieure. Prix mis à jour chaque matin.
           </p>
           <div className="flex flex-wrap gap-4">
@@ -204,9 +202,9 @@ export default async function HomePage() {
               Un partenaire de confiance depuis plus de 15 ans
             </h2>
             <p className="text-brand-charcoal/70 leading-relaxed mb-6 font-sans">
-              Atlantic est une entreprise algérienne spécialisée dans la production et la
-              distribution de céréales et d&apos;aliments du bétail. Notre mission : fournir
-              des produits de qualité supérieure aux éleveurs de tout le pays.
+              Atlantic est une entreprise algérienne spécialisée dans le négoce et la
+              distribution de céréales et de produits du soja. Notre mission : fournir
+              des matières premières de qualité supérieure aux acheteurs de tout le pays.
             </p>
             <ul className="space-y-3 mb-8">
               {ABOUT_POINTS.map((point) => (
@@ -232,7 +230,7 @@ export default async function HomePage() {
               <div className="mt-6 w-12 h-0.5 bg-brand-gold mx-auto" />
               <p className="font-serif text-2xl font-bold text-white mt-6">Atlantic</p>
               <p className="text-brand-gold/70 text-xs uppercase tracking-widest font-sans mt-1">
-                Aliments du bétail
+                Céréales & Soja
               </p>
             </div>
           </div>

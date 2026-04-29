@@ -15,8 +15,8 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Atlantic — Aliments du bétail',
-  description: "L'excellence au service de l'élevage algérien. Production et distribution de céréales et aliments du bétail.",
+  title: 'Atlantic — Céréales & Produits du soja',
+  description: "Votre partenaire en céréales et produits du soja. Production et distribution de maïs, orge, soja et coque de soja à travers toute l'Algérie.",
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

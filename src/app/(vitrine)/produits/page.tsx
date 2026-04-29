@@ -22,7 +22,7 @@ export default function ProduitsPage() {
             Nos produits
           </h1>
           <p className="text-white/60 max-w-xl font-sans">
-            Des céréales et aliments du bétail produits et sélectionnés pour leur qualité.
+            Des céréales et produits du soja sélectionnés pour leur qualité.
             Disponibles à la tonne, livrés partout en Algérie.
           </p>
         </div>

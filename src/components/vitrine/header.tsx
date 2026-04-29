@@ -28,7 +28,7 @@ export function Header() {
             Atlantic
           </span>
           <span className="text-[10px] text-brand-gold/80 uppercase tracking-[0.2em] font-sans">
-            Aliments du bétail
+            Céréales & Soja
           </span>
         </Link>
 

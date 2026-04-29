@@ -23,11 +23,11 @@ export function Footer() {
         <div>
           <p className="font-serif text-2xl font-bold text-brand-cream mb-1">Atlantic</p>
           <p className="text-xs uppercase tracking-[0.2em] text-brand-gold mb-4 font-sans">
-            Aliments du bétail
+            Céréales & Soja
           </p>
           <p className="text-sm leading-relaxed text-brand-cream/60 max-w-xs">
-            L&apos;excellence au service de l&apos;élevage algérien. Céréales et aliments du bétail
-            produits et distribués à travers toute l&apos;Algérie.
+            Votre partenaire en céréales et produits du soja. Production et distribution
+            à travers toute l&apos;Algérie.
           </p>
         </div>
 

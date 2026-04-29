@@ -8,11 +8,10 @@ import { Package } from 'lucide-react'
 
 const CATEGORY_LABELS: Record<string, string> = {
   cereal: 'Céréales',
-  feed: 'Aliments du bétail',
-  raw_material: 'Matières premières',
+  soy: 'Produits du soja',
 }
 
-const CATEGORY_ORDER = ['cereal', 'feed', 'raw_material']
+const CATEGORY_ORDER = ['cereal', 'soy']
 
 export function ProductGrid({ products }: { products: Product[] }) {
   const categories = CATEGORY_ORDER.filter((c) =>

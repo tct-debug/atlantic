@@ -6,29 +6,29 @@ const SERVICES = [
     icon: Factory,
     title: 'Production',
     description:
-      'Fabrication de céréales transformées et d\'aliments composés dans nos unités de production algériennes, avec des contrôles qualité à chaque étape.',
-    points: ['Maïs grain, orge, son de blé', 'Aliments composés pour bovins et ovins', 'Aliments volailles et équidés'],
+      'Production et stockage de céréales dans nos unités algériennes, avec des contrôles qualité à chaque étape.',
+    points: ['Maïs, orge, soja, coque de soja', 'Contrôle de l\'humidité et de la pureté', 'Stockage en silo selon les normes'],
   },
   {
     icon: Truck,
     title: 'Distribution',
     description:
-      'Livraison dans toutes les wilayas grâce à notre réseau logistique. Commandes au détail ou en gros, selon vos besoins et votre planning d\'élevage.',
+      'Livraison dans toutes les wilayas grâce à notre réseau logistique. Commandes en vrac ou en sac, selon vos volumes et votre calendrier.',
     points: ['Livraison sous 24 à 72 h', 'Camions adaptés (vrac ou palettes)', 'Suivi de commande en temps réel'],
   },
   {
     icon: BookOpen,
-    title: 'Conseil & Expertise',
+    title: 'Qualité & Expertise',
     description:
-      'Notre équipe de spécialistes en nutrition animale vous aide à choisir les produits et les quantités adaptés à votre cheptel et à votre budget.',
-    points: ['Diagnostic nutritionnel gratuit', 'Plans de rationnement personnalisés', 'Suivi des performances zootechniques'],
+      'Notre équipe vous aide à choisir les produits et les qualités adaptés à vos besoins industriels ou de négoce.',
+    points: ['Analyse de la teneur en protéines et humidité', 'Conseil en sourcing et saisonnalité', 'Certificats qualité sur demande'],
   },
   {
     icon: Handshake,
     title: 'Partenariats',
     description:
-      'Nous travaillons avec les coopératives agricoles, les grandes exploitations et les distributeurs régionaux pour garantir un approvisionnement fluide.',
-    points: ['Contrats d\'approvisionnement annuels', 'Tarifs préférentiels sur volume', 'Programme de fidélité éleveurs'],
+      'Nous travaillons avec les coopératives agricoles, les industriels et les distributeurs régionaux pour garantir un approvisionnement fluide.',
+    points: ['Contrats d\'approvisionnement annuels', 'Tarifs préférentiels sur volume', 'Programme de fidélité clients'],
   },
 ]
 
@@ -41,7 +41,7 @@ const ORDER_STEPS = [
   {
     step: '02',
     title: 'Devis personnalisé',
-    body: 'Nous établissons un devis adapté à vos volumes, votre espèce et votre wilaya de livraison.',
+    body: 'Nous établissons un devis adapté à vos volumes, votre produit et votre wilaya de livraison.',
   },
   {
     step: '03',
@@ -69,7 +69,7 @@ export default function ServicesPage() {
           </h1>
           <p className="text-white/60 max-w-xl font-sans">
             De la production à la livraison, Atlantic couvre l&apos;ensemble de la chaîne de valeur
-            pour les éleveurs algériens.
+            pour les acheteurs algériens.
           </p>
         </div>
       </div>
