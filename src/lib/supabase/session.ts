@@ -15,8 +15,8 @@ export async function updateSession(request: NextRequest) {
         },
         setAll(cookiesToSet, headers) {
           // Mutate the request so the page handler sees the refreshed token.
-          cookiesToSet.forEach(({ name, value, options }) =>
-            request.cookies.set(name, value, options)
+          cookiesToSet.forEach(({ name, value }) =>
+            request.cookies.set(name, value)
           )
           // Rebuild the response so it carries the new Set-Cookie headers.
           supabaseResponse = NextResponse.next({ request })

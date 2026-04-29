@@ -1,23 +1,62 @@
-// Phase 2 — client portal (not yet built)
-// This route is scaffolded so the URL /portal is reserved.
-export default function PortalPage() {
+import { requireClient } from '@/lib/auth/guards'
+import { getCustomerPrices } from '@/lib/modules/client-pricing/queries'
+
+function formatPrice(price: number): string {
+  return new Intl.NumberFormat('fr-DZ').format(price)
+}
+
+export default async function PortalPage() {
+  const { user, name, company } = await requireClient()
+  const prices = await getCustomerPrices(user.id)
+
+  const displayName = company ?? name ?? user.email
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-6">
-      <div className="text-center">
-        <p className="text-xs font-semibold uppercase tracking-widest text-green-700 mb-4">
-          Atlantic
-        </p>
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">Espace client</h1>
-        <p className="text-gray-500 mb-8">
-          Cette fonctionnalité sera disponible prochainement.
-        </p>
-        <a
-          href="/"
-          className="text-sm font-medium text-green-700 hover:text-green-800 transition-colors"
-        >
-          ← Retour à l'accueil
-        </a>
+    <main className="max-w-4xl mx-auto px-6 py-10">
+      <div className="mb-8">
+        <p className="text-sm text-gray-500">{displayName}</p>
+        <h2 className="text-2xl font-bold text-gray-900 mt-1">Vos tarifs négociés</h2>
       </div>
-    </div>
+
+      {prices.length === 0 ? (
+        <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-10 text-center">
+          <p className="text-gray-500">Aucun tarif personnalisé pour l&apos;instant.</p>
+          <p className="text-sm text-gray-400 mt-2">
+            Contactez-nous pour établir vos prix négociés.
+          </p>
+          <a
+            href="/contact"
+            className="inline-block mt-5 text-sm font-medium text-green-700 hover:text-green-800 transition-colors"
+          >
+            Nous contacter →
+          </a>
+        </div>
+      ) : (
+        <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-gray-100 bg-gray-50">
+                <th className="text-left px-6 py-3 font-medium text-gray-600">Produit</th>
+                <th className="text-left px-6 py-3 font-medium text-gray-600">Unité</th>
+                <th className="text-right px-6 py-3 font-medium text-gray-600">
+                  Votre prix (DZD)
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-100">
+              {prices.map((p) => (
+                <tr key={p.id} className="hover:bg-gray-50 transition-colors">
+                  <td className="px-6 py-4 font-medium text-gray-900">{p.product_name}</td>
+                  <td className="px-6 py-4 text-gray-500">{p.unit}</td>
+                  <td className="px-6 py-4 text-right font-bold text-green-700 text-base">
+                    {formatPrice(p.price)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </main>
   )
 }

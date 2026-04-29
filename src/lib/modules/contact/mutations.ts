@@ -9,7 +9,7 @@ export async function submitContactMessage(
 ): Promise<{ error?: string }> {
   const result = contactSchema.safeParse(data)
   if (!result.success) {
-    return { error: result.error.errors[0]?.message ?? 'Données invalides.' }
+    return { error: result.error.issues[0]?.message ?? 'Données invalides.' }
   }
 
   try {
