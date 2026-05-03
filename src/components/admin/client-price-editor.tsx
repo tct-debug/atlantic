@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { setCustomerPrice, deleteCustomerPrice } from '@/lib/modules/client-pricing/mutations'
-import { updateClientProfile } from '@/lib/modules/clients/mutations'
+import { updateClientProfile, deleteClient } from '@/lib/modules/clients/mutations'
 import type { CustomerPriceWithProduct } from '@/lib/modules/client-pricing/types'
 import type { Product } from '@/lib/modules/products/types'
 import type { Client, ClientType } from '@/lib/modules/clients/types'
@@ -70,6 +70,22 @@ export function ClientPriceEditor({ client, products, existingPrices }: Props) {
   const [region, setRegion] = useState(client.region ?? '')
   const [clientType, setClientType] = useState<ClientType | ''>(client.client_type ?? '')
   const [profileStatus, setProfileStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
+  const [deleting, setDeleting] = useState(false)
+
+  async function handleDeleteClient() {
+    const confirmed = window.confirm(
+      `Supprimer le compte de ${client.company_name ?? client.full_name ?? client.email} ? Cette action est irréversible.`
+    )
+    if (!confirmed) return
+    setDeleting(true)
+    const res = await deleteClient(client.id)
+    if (res.error) {
+      alert(res.error)
+      setDeleting(false)
+    } else {
+      router.push('/admin?tab=clients')
+    }
+  }
 
   async function handleSaveProfile() {
     setProfileStatus('saving')
@@ -125,19 +141,29 @@ export function ClientPriceEditor({ client, products, existingPrices }: Props) {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center gap-4">
-        <a
-          href="/admin?tab=clients"
-          className="text-sm text-gray-500 hover:text-gray-700 transition-colors"
-        >
-          ← Retour
-        </a>
-        <div>
-          <h2 className="text-lg font-semibold text-gray-900">
-            {client.company_name ?? client.full_name ?? client.email}
-          </h2>
-          <p className="text-xs text-gray-400">{client.email}</p>
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center gap-4">
+          <a
+            href="/admin?tab=clients"
+            className="text-sm text-gray-500 hover:text-gray-700 transition-colors"
+          >
+            ← Retour
+          </a>
+          <div>
+            <h2 className="text-lg font-semibold text-gray-900">
+              {client.company_name ?? client.full_name ?? client.email}
+            </h2>
+            <p className="text-xs text-gray-400">{client.email}</p>
+          </div>
         </div>
+        <button
+          onClick={handleDeleteClient}
+          disabled={deleting}
+          className="px-3 py-1.5 text-sm font-medium text-red-600 border border-red-200 rounded-lg
+                     hover:bg-red-50 disabled:opacity-50 transition-colors whitespace-nowrap"
+        >
+          {deleting ? 'Suppression…' : 'Supprimer le compte'}
+        </button>
       </div>
 
       {/* ── Profile card ─────────────────────────────────────────────────── */}

@@ -58,10 +58,10 @@ export default async function PortalPage() {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-100 bg-gray-50">
-                <th className="text-left px-6 py-3 font-medium text-gray-600">Produit</th>
-                <th className="text-left px-6 py-3 font-medium text-gray-600">Unité</th>
-                <th className="text-right px-6 py-3 font-medium text-gray-600">Votre prix (DZD)</th>
-                <th className="text-right px-6 py-3 font-medium text-gray-600 hidden sm:table-cell">
+                <th className="text-left px-3 sm:px-6 py-3 font-medium text-gray-600">Produit</th>
+                <th className="hidden sm:table-cell text-left px-6 py-3 font-medium text-gray-600">Unité</th>
+                <th className="text-right px-3 sm:px-6 py-3 font-medium text-gray-600">Votre prix (DZD)</th>
+                <th className="text-right px-3 sm:px-6 py-3 font-medium text-gray-600">
                   Mis à jour
                 </th>
               </tr>
@@ -69,12 +69,12 @@ export default async function PortalPage() {
             <tbody className="divide-y divide-gray-100">
               {prices.map((p) => (
                 <tr key={p.id} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-6 py-4 font-medium text-gray-900">{p.product_name}</td>
-                  <td className="px-6 py-4 text-gray-500">{p.unit}</td>
-                  <td className="px-6 py-4 text-right font-bold text-green-700 text-base">
+                  <td className="px-3 sm:px-6 py-3 sm:py-4 font-medium text-gray-900">{p.product_name}</td>
+                  <td className="hidden sm:table-cell px-6 py-4 text-gray-500">{p.unit}</td>
+                  <td className="px-3 sm:px-6 py-3 sm:py-4 text-right font-bold text-green-700 text-base">
                     {formatPrice(p.price)}
                   </td>
-                  <td className="px-6 py-4 text-right text-gray-400 text-xs font-sans hidden sm:table-cell">
+                  <td className="px-3 sm:px-6 py-3 sm:py-4 text-right text-gray-400 text-xs font-sans">
                     {formatUpdatedAt(p.valid_from)}
                   </td>
                 </tr>

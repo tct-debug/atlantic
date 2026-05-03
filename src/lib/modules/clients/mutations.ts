@@ -58,6 +58,31 @@ export async function createNewClient(
   return {}
 }
 
+export async function deleteClient(
+  clientId: string
+): Promise<{ error?: string }> {
+  const supabase = await createSupabaseClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return { error: 'Non autorisé.' }
+
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('role')
+    .eq('id', user.id)
+    .single()
+
+  if (!profile || !['admin', 'employee'].includes(profile.role)) {
+    return { error: 'Non autorisé.' }
+  }
+
+  const admin = createAdminClient()
+  const { error } = await admin.auth.admin.deleteUser(clientId)
+  if (error) return { error: error.message }
+
+  revalidatePath('/admin')
+  return {}
+}
+
 export async function updateClientProfile(
   clientId: string,
   updates: { region?: string; client_type?: ClientType | '' }
