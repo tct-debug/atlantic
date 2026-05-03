@@ -2,26 +2,10 @@ import { Mail, Phone, MapPin, Clock } from 'lucide-react'
 import { ContactForm } from '@/components/vitrine/contact-form'
 
 const CONTACT_DETAILS = [
-  {
-    icon: Mail,
-    label: 'Email',
-    value: 'contact@atlantic-dz.com',
-  },
-  {
-    icon: Phone,
-    label: 'Téléphone',
-    value: '+213 (0) 0 00 00 00 00',
-  },
-  {
-    icon: MapPin,
-    label: 'Adresse',
-    value: 'Algérie',
-  },
-  {
-    icon: Clock,
-    label: 'Disponibilité',
-    value: 'Dim – Jeu, 8h – 17h',
-  },
+  { icon: Mail,   label: 'Email',         value: 'contact@atlantic-dz.com' },
+  { icon: Phone,  label: 'Téléphone',     value: '+213 (0) 0 00 00 00 00' },
+  { icon: MapPin, label: 'Adresse',       value: 'Algérie' },
+  { icon: Clock,  label: 'Disponibilité', value: 'Dim – Jeu, 8h – 17h' },
 ]
 
 export default function ContactPage() {
@@ -37,7 +21,7 @@ export default function ContactPage() {
             Contactez-nous
           </h1>
           <p className="text-white/60 max-w-xl font-sans">
-            Une question, une demande de devis, ou simplement envie d&apos;en savoir plus ?
+            Une question, une demande de tarif, ou simplement envie d&apos;en savoir plus ?
             Notre équipe vous répond sous 24 heures ouvrées.
           </p>
         </div>
@@ -60,11 +44,10 @@ export default function ContactPage() {
         </div>
 
         {/* Info — narrower column */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-2 space-y-5">
+          {/* Coordonnées */}
           <div className="bg-brand-green rounded-xl p-7 text-white">
-            <h3 className="font-serif text-lg font-bold text-white mb-5">
-              Coordonnées
-            </h3>
+            <h3 className="font-serif text-lg font-bold text-white mb-5">Coordonnées</h3>
             <ul className="space-y-5">
               {CONTACT_DETAILS.map(({ icon: Icon, label, value }) => (
                 <li key={label} className="flex items-start gap-3.5">
@@ -80,6 +63,22 @@ export default function ContactPage() {
             </ul>
           </div>
 
+          {/* Office / facility photo */}
+          <div className="rounded-xl overflow-hidden h-44 relative">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://picsum.photos/seed/office-modern-algeria/500/300"
+              alt=""
+              className="w-full h-full object-cover"
+            />
+            {/*
+              Replace with: /images/contact-office.jpg
+              Suggested: photo of your office reception, team, or loading facility
+            */}
+            <div className="absolute inset-0 bg-brand-charcoal/20" />
+          </div>
+
+          {/* Urgence card */}
           <div className="bg-brand-wheat rounded-xl p-7 border border-brand-wheat">
             <h3 className="font-serif text-base font-bold text-brand-charcoal mb-2">
               Demande urgente ?

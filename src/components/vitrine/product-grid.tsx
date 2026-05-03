@@ -4,14 +4,37 @@ import { useState } from 'react'
 import { Badge } from '@/components/ui/badge'
 import type { Product } from '@/lib/modules/products/types'
 import { cn } from '@/lib/utils'
-import { Package } from 'lucide-react'
+import { Wheat, Leaf } from 'lucide-react'
 
 const CATEGORY_LABELS: Record<string, string> = {
   cereal: 'Céréales',
   soy: 'Produits du soja',
 }
 
+const CATEGORY_ICONS: Record<string, React.ReactNode> = {
+  cereal: <Wheat className="w-5 h-5 text-brand-gold" />,
+  soy: <Leaf className="w-5 h-5 text-brand-gold" />,
+}
+
 const CATEGORY_ORDER = ['cereal', 'soy']
+
+// Fallback seeds per product slug — replace with /public/images/products/{slug}.jpg
+const PRODUCT_IMAGE_SEEDS: Record<string, string> = {
+  'mais':        'corn-field-golden',
+  'orge':        'barley-field-harvest',
+  'ble-dur':     'wheat-hard-durum',
+  'ble-tendre':  'wheat-soft-mill',
+  'son-ble':     'wheat-bran-mill',
+  'soja':        'soybean-field-green',
+  'coque-soja':  'soybean-hull-pile',
+  'farine-soja': 'soy-flour-bag',
+}
+
+function productImageSrc(product: Product): string {
+  if (product.image_url) return product.image_url
+  const seed = PRODUCT_IMAGE_SEEDS[product.slug] ?? product.slug
+  return `https://picsum.photos/seed/${seed}/600/300`
+}
 
 export function ProductGrid({ products }: { products: Product[] }) {
   const categories = CATEGORY_ORDER.filter((c) =>
@@ -54,33 +77,54 @@ export function ProductGrid({ products }: { products: Product[] }) {
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {filtered.map((product) => (
           <div
             key={product.id}
-            className="bg-white rounded-xl border border-brand-wheat shadow-sm p-7 flex flex-col"
+            className="bg-white rounded-xl border border-brand-wheat shadow-sm overflow-hidden flex flex-col"
           >
-            <div className="flex items-start justify-between mb-4">
-              <Badge
-                variant="outline"
-                className="text-xs border-brand-gold/40 text-brand-gold bg-brand-gold/5 font-sans"
-              >
-                {CATEGORY_LABELS[product.category] ?? product.category}
-              </Badge>
-              <Package className="w-4 h-4 text-brand-charcoal/20 flex-shrink-0" />
+            {/* Product image */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <div className="h-44 overflow-hidden bg-brand-wheat/40">
+              <img
+                src={productImageSrc(product)}
+                alt={product.name}
+                className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+              />
+              {/*
+                To replace this image:
+                Option A — Supabase: set the image_url column for this product in the products table
+                Option B — Local file: put your photo at /public/images/products/{slug}.jpg
+                           and set image_url to "/images/products/{slug}.jpg" in Supabase
+              */}
             </div>
-            <h3 className="font-serif text-lg font-semibold text-brand-charcoal mb-2 leading-snug">
-              {product.name}
-            </h3>
-            {product.description && (
-              <p className="text-sm text-brand-charcoal/60 leading-relaxed mb-4 font-sans flex-1">
-                {product.description}
-              </p>
-            )}
-            <div className="mt-auto pt-4 border-t border-brand-wheat">
-              <span className="text-xs text-brand-charcoal/40 uppercase tracking-wide font-sans">
-                Unité de vente : {product.unit}
-              </span>
+
+            {/* Card body */}
+            <div className="p-7 flex flex-col flex-1">
+              <div className="flex items-start justify-between mb-4">
+                <Badge
+                  variant="outline"
+                  className="text-xs border-brand-gold/40 text-brand-gold bg-brand-gold/5 font-sans"
+                >
+                  {CATEGORY_LABELS[product.category] ?? product.category}
+                </Badge>
+                <div className="w-8 h-8 rounded-lg bg-brand-green/8 flex items-center justify-center flex-shrink-0">
+                  {CATEGORY_ICONS[product.category]}
+                </div>
+              </div>
+              <h3 className="font-serif text-lg font-semibold text-brand-charcoal mb-2 leading-snug">
+                {product.name}
+              </h3>
+              {product.description && (
+                <p className="text-sm text-brand-charcoal/60 leading-relaxed mb-4 font-sans flex-1">
+                  {product.description}
+                </p>
+              )}
+              <div className="mt-auto pt-4 border-t border-brand-wheat">
+                <span className="text-xs text-brand-charcoal/40 uppercase tracking-wide font-sans">
+                  Unité de vente : {product.unit}
+                </span>
+              </div>
             </div>
           </div>
         ))}

@@ -75,13 +75,26 @@ export default function AProposPage() {
           </div>
         </div>
 
-        {/* Decorative */}
-        <div className="bg-brand-wheat rounded-2xl p-10 border border-brand-wheat">
-          <blockquote className="font-serif text-2xl font-bold text-brand-charcoal leading-snug mb-6">
-            &ldquo;Votre partenaire en céréales et produits du soja.&rdquo;
-          </blockquote>
-          <div className="w-10 h-0.5 bg-brand-gold mb-4" />
-          <p className="text-sm text-brand-charcoal/50 font-sans">Notre raison d&apos;être depuis 2009</p>
+        {/* Story photo — replace with your own */}
+        <div className="relative h-80 md:min-h-[420px] rounded-2xl overflow-hidden shadow-md">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="https://picsum.photos/seed/algeria-grain-field/600/500"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          {/*
+            Replace with: /images/about-story.jpg
+            Suggested: aerial photo of a grain field or silo complex in Algeria
+          */}
+          <div className="absolute inset-0 bg-brand-green/50" />
+          <div className="absolute bottom-8 left-8 right-8 z-10">
+            <blockquote className="font-serif text-xl font-bold text-white leading-snug">
+              &ldquo;Votre partenaire en céréales et produits du soja.&rdquo;
+            </blockquote>
+            <div className="w-10 h-0.5 bg-brand-gold mt-4" />
+            <p className="text-white/60 text-sm font-sans mt-3">Notre raison d&apos;être depuis 2009</p>
+          </div>
         </div>
       </section>
 
@@ -103,15 +116,33 @@ export default function AProposPage() {
                 <div className="w-10 h-10 rounded-lg bg-brand-green/10 flex items-center justify-center mb-4">
                   <Icon className="w-5 h-5 text-brand-green" />
                 </div>
-                <h3 className="font-serif text-lg font-semibold text-brand-charcoal mb-2">
-                  {title}
-                </h3>
+                <h3 className="font-serif text-lg font-semibold text-brand-charcoal mb-2">{title}</h3>
                 <p className="text-sm text-brand-charcoal/60 leading-relaxed font-sans">{body}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Full-width facility photo strip */}
+      <div className="relative h-64 md:h-80 overflow-hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://picsum.photos/seed/grain-warehouse-facility/1920/600"
+          alt=""
+          className="w-full h-full object-cover object-center"
+        />
+        {/*
+          Replace with: /images/about-facility.jpg
+          Suggested: wide interior/exterior shot of your warehouse, silos, or loading dock
+        */}
+        <div className="absolute inset-0 bg-brand-charcoal/40" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <p className="font-serif text-2xl md:text-3xl font-bold text-white text-center px-6">
+            Des installations modernes au service de la qualité
+          </p>
+        </div>
+      </div>
 
       {/* Stats */}
       <section className="bg-brand-green py-16">
