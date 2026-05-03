@@ -88,15 +88,15 @@ export function PriceEditor({ rows }: { rows: PriceRow[] }) {
         <span className="text-sm text-gray-500 capitalize">{today}</span>
       </div>
 
-      <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-gray-100 bg-gray-50">
-              <th className="text-left px-6 py-3 font-medium text-gray-600">Produit</th>
-              <th className="text-left px-6 py-3 font-medium text-gray-600">Unité</th>
-              <th className="text-left px-6 py-3 font-medium text-gray-600">Prix (DZD)</th>
-              <th className="text-left px-6 py-3 font-medium text-gray-600">Dernière mise à jour</th>
-              <th className="px-6 py-3"></th>
+              <th className="text-left px-3 sm:px-6 py-3 font-medium text-gray-600">Produit</th>
+              <th className="hidden sm:table-cell text-left px-6 py-3 font-medium text-gray-600">Unité</th>
+              <th className="text-left px-3 sm:px-6 py-3 font-medium text-gray-600">Prix (DZD)</th>
+              <th className="hidden md:table-cell text-left px-6 py-3 font-medium text-gray-600">Dernière mise à jour</th>
+              <th className="px-3 sm:px-6 py-3"></th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
@@ -106,11 +106,11 @@ export function PriceEditor({ rows }: { rows: PriceRow[] }) {
 
               return (
                 <tr key={row.productId} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-6 py-4 font-medium text-gray-900">
+                  <td className="px-3 sm:px-6 py-3 sm:py-4 font-medium text-gray-900">
                     {row.productName}
                   </td>
-                  <td className="px-6 py-4 text-gray-500">{row.unit}</td>
-                  <td className="px-6 py-4">
+                  <td className="hidden sm:table-cell px-6 py-4 text-gray-500">{row.unit}</td>
+                  <td className="px-3 sm:px-6 py-3 sm:py-4">
                     <div className="flex items-center gap-2">
                       <input
                         type="number"
@@ -125,7 +125,7 @@ export function PriceEditor({ rows }: { rows: PriceRow[] }) {
                           setStatus(row.productId, 'idle')
                           setErrors((prev) => ({ ...prev, [row.productId]: '' }))
                         }}
-                        className="w-36 px-3 py-1.5 border border-gray-300 rounded-lg text-sm
+                        className="w-24 sm:w-36 px-3 py-1.5 border border-gray-300 rounded-lg text-sm
                                    focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
                       />
                       {fieldError && (
@@ -133,13 +133,13 @@ export function PriceEditor({ rows }: { rows: PriceRow[] }) {
                       )}
                     </div>
                   </td>
-                  <td className="px-6 py-4 text-gray-400 text-xs">
+                  <td className="hidden md:table-cell px-6 py-4 text-gray-400 text-xs">
                     {formatUpdatedAt(row.updatedAt)}
                   </td>
-                  <td className="px-6 py-4">
-                    <div className="flex items-center gap-3 justify-end">
+                  <td className="px-3 sm:px-6 py-3 sm:py-4">
+                    <div className="flex items-center gap-2 sm:gap-3 justify-end">
                       {status === 'saved' && (
-                        <span className="text-xs text-green-600 font-medium">✓ Enregistré</span>
+                        <span className="text-xs text-green-600 font-medium hidden sm:inline">✓ Enregistré</span>
                       )}
                       {status === 'error' && !fieldError && (
                         <span className="text-xs text-red-500 font-medium">Erreur</span>
@@ -147,10 +147,10 @@ export function PriceEditor({ rows }: { rows: PriceRow[] }) {
                       <button
                         onClick={() => handleSave(row.productId)}
                         disabled={status === 'saving'}
-                        className="px-4 py-1.5 bg-green-700 text-white text-sm font-medium rounded-lg
-                                   hover:bg-green-800 disabled:opacity-50 transition-colors"
+                        className="px-3 sm:px-4 py-1.5 bg-green-700 text-white text-sm font-medium rounded-lg
+                                   hover:bg-green-800 disabled:opacity-50 transition-colors whitespace-nowrap"
                       >
-                        {status === 'saving' ? 'Sauvegarde…' : 'Enregistrer'}
+                        {status === 'saving' ? '…' : 'Enregistrer'}
                       </button>
                     </div>
                   </td>

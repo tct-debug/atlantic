@@ -162,27 +162,27 @@ export function ClientsTab({ clients }: { clients: Client[] }) {
       {clients.length === 0 ? (
         <p className="text-gray-400 text-sm py-10 text-center">Aucun client enregistré.</p>
       ) : (
-        <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+        <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-100 bg-gray-50">
-                <th className="text-left px-6 py-3 font-medium text-gray-600">Nom</th>
-                <th className="text-left px-6 py-3 font-medium text-gray-600">Entreprise</th>
-                <th className="text-left px-6 py-3 font-medium text-gray-600">Région</th>
-                <th className="text-left px-6 py-3 font-medium text-gray-600">Type</th>
-                <th className="px-6 py-3" />
+                <th className="text-left px-3 sm:px-6 py-3 font-medium text-gray-600">Nom</th>
+                <th className="hidden sm:table-cell text-left px-6 py-3 font-medium text-gray-600">Entreprise</th>
+                <th className="hidden sm:table-cell text-left px-6 py-3 font-medium text-gray-600">Région</th>
+                <th className="text-left px-3 sm:px-6 py-3 font-medium text-gray-600">Type</th>
+                <th className="px-3 sm:px-6 py-3" />
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
               {clients.map((client) => (
                 <tr key={client.id} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-6 py-4">
+                  <td className="px-3 sm:px-6 py-3 sm:py-4">
                     <p className="font-medium text-gray-900">{client.full_name ?? '—'}</p>
                     <p className="text-xs text-gray-400">{client.email}</p>
                   </td>
-                  <td className="px-6 py-4 text-gray-500">{client.company_name ?? '—'}</td>
-                  <td className="px-6 py-4 text-gray-500">{client.region ?? '—'}</td>
-                  <td className="px-6 py-4">
+                  <td className="hidden sm:table-cell px-6 py-4 text-gray-500">{client.company_name ?? '—'}</td>
+                  <td className="hidden sm:table-cell px-6 py-4 text-gray-500">{client.region ?? '—'}</td>
+                  <td className="px-3 sm:px-6 py-3 sm:py-4">
                     {client.client_type ? (
                       <span className="inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-green-50 text-green-700 border border-green-200">
                         {TYPE_LABELS[client.client_type]}
@@ -191,12 +191,12 @@ export function ClientsTab({ clients }: { clients: Client[] }) {
                       <span className="text-gray-400">—</span>
                     )}
                   </td>
-                  <td className="px-6 py-4 text-right">
+                  <td className="px-3 sm:px-6 py-3 sm:py-4 text-right">
                     <a
                       href={`/admin?tab=clients&client=${client.id}`}
-                      className="text-sm font-medium text-green-700 hover:text-green-800 transition-colors"
+                      className="text-sm font-medium text-green-700 hover:text-green-800 transition-colors whitespace-nowrap"
                     >
-                      Modifier les prix →
+                      Modifier →
                     </a>
                   </td>
                 </tr>

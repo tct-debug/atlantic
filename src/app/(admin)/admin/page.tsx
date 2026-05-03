@@ -65,7 +65,7 @@ export default async function AdminPage({
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white border-b border-gray-200">
-        <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-green-700">Atlantic</p>
             <h1 className="text-lg font-bold text-gray-900">Tableau de bord</h1>
@@ -81,7 +81,7 @@ export default async function AdminPage({
         </div>
 
         {/* Status bar */}
-        <div className="max-w-5xl mx-auto px-6 pb-2 flex items-center gap-2">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 pb-2 flex items-center gap-2">
           {unpricedCount === 0 ? (
             <>
               <span className="inline-block w-2 h-2 rounded-full bg-green-500" />
@@ -98,7 +98,7 @@ export default async function AdminPage({
         </div>
 
         {/* Tab nav */}
-        <div className="max-w-5xl mx-auto px-6 flex gap-1 border-t border-gray-100 pt-1">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 flex gap-1 border-t border-gray-100 pt-1 overflow-x-auto">
           {[
             { key: 'prix', label: 'Prix du jour' },
             { key: 'tarifs', label: 'Tarifs segments' },
@@ -120,7 +120,7 @@ export default async function AdminPage({
       </header>
 
       {/* Main */}
-      <main className="max-w-5xl mx-auto px-6 py-10">
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
         {tab === 'prix' && <PriceEditor rows={rows} />}
 
         {tab === 'tarifs' && (
