@@ -16,7 +16,7 @@ import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
 const SLIDES = [
   {
     // Replace with: /images/hero-grain-field.jpg  (wheat / grain field, Algeria)
-    image: 'https://picsum.photos/seed/grainfield/1920/1080',
+    image: '/images/slide.jpg',
     label: 'Production · Algérie',
     title: 'Votre partenaire en céréales et produits du soja',
     subtitle:
