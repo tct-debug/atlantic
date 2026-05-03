@@ -191,15 +191,15 @@ export function ClientPriceEditor({ client, products, existingPrices }: Props) {
       {/* ── Negotiated prices table ───────────────────────────────────────── */}
       <div>
         <h3 className="text-sm font-semibold text-gray-700 mb-3">Prix négociés</h3>
-        <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+        <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-100 bg-gray-50">
-                <th className="text-left px-6 py-3 font-medium text-gray-600">Produit</th>
-                <th className="text-left px-6 py-3 font-medium text-gray-600">Unité</th>
-                <th className="text-left px-6 py-3 font-medium text-gray-600">Prix négocié (DZD)</th>
-                <th className="text-left px-6 py-3 font-medium text-gray-600 hidden sm:table-cell">Mis à jour</th>
-                <th className="px-6 py-3" />
+                <th className="text-left px-3 sm:px-6 py-3 font-medium text-gray-600">Produit</th>
+                <th className="hidden sm:table-cell text-left px-6 py-3 font-medium text-gray-600">Unité</th>
+                <th className="text-left px-3 sm:px-6 py-3 font-medium text-gray-600">Prix négocié (DZD)</th>
+                <th className="hidden sm:table-cell text-left px-6 py-3 font-medium text-gray-600">Mis à jour</th>
+                <th className="px-3 sm:px-6 py-3" />
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
@@ -210,9 +210,9 @@ export function ClientPriceEditor({ client, products, existingPrices }: Props) {
 
                 return (
                   <tr key={product.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-6 py-4 font-medium text-gray-900">{product.name}</td>
-                    <td className="px-6 py-4 text-gray-500">{product.unit}</td>
-                    <td className="px-6 py-4">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 font-medium text-gray-900">{product.name}</td>
+                    <td className="hidden sm:table-cell px-6 py-4 text-gray-500">{product.unit}</td>
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
                       <div className="flex items-center gap-2">
                         <input
                           type="number"
@@ -225,7 +225,7 @@ export function ClientPriceEditor({ client, products, existingPrices }: Props) {
                             setStatus(product.id, 'idle')
                             setErrors((prev) => ({ ...prev, [product.id]: '' }))
                           }}
-                          className="w-36 px-3 py-1.5 border border-gray-300 rounded-lg text-sm
+                          className="w-24 sm:w-36 px-3 py-1.5 border border-gray-300 rounded-lg text-sm
                                      focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
                         />
                         {fieldError && (
@@ -233,15 +233,15 @@ export function ClientPriceEditor({ client, products, existingPrices }: Props) {
                         )}
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-gray-400 text-xs font-sans hidden sm:table-cell">
+                    <td className="hidden sm:table-cell px-6 py-4 text-gray-400 text-xs font-sans">
                       {priceMap.has(product.id)
                         ? fmtUpdatedAt(existingPrices.find((p) => p.product_id === product.id)!.valid_from)
                         : '—'}
                     </td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-3 justify-end">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
+                      <div className="flex items-center gap-2 sm:gap-3 justify-end">
                         {status === 'saved' && (
-                          <span className="text-xs text-green-600 font-medium">✓ Enregistré</span>
+                          <span className="hidden sm:inline text-xs text-green-600 font-medium">✓ Enregistré</span>
                         )}
                         {status === 'error' && !fieldError && (
                           <span className="text-xs text-red-500">Erreur</span>
@@ -250,7 +250,7 @@ export function ClientPriceEditor({ client, products, existingPrices }: Props) {
                           <button
                             onClick={() => handleDelete(product.id)}
                             disabled={status === 'deleting' || status === 'saving'}
-                            className="text-xs text-red-500 hover:text-red-700 disabled:opacity-50 transition-colors"
+                            className="text-xs text-red-500 hover:text-red-700 disabled:opacity-50 transition-colors whitespace-nowrap"
                           >
                             {status === 'deleting' ? '…' : 'Supprimer'}
                           </button>
@@ -258,10 +258,10 @@ export function ClientPriceEditor({ client, products, existingPrices }: Props) {
                         <button
                           onClick={() => handleSavePrice(product.id)}
                           disabled={status === 'saving' || !values[product.id]}
-                          className="px-4 py-1.5 bg-green-700 text-white text-sm font-medium rounded-lg
-                                     hover:bg-green-800 disabled:opacity-50 transition-colors"
+                          className="px-3 sm:px-4 py-1.5 bg-green-700 text-white text-sm font-medium rounded-lg
+                                     hover:bg-green-800 disabled:opacity-50 transition-colors whitespace-nowrap"
                         >
-                          {status === 'saving' ? 'Sauvegarde…' : 'Enregistrer'}
+                          {status === 'saving' ? '…' : 'Enregistrer'}
                         </button>
                       </div>
                     </td>
