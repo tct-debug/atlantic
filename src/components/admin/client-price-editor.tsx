@@ -141,26 +141,26 @@ export function ClientPriceEditor({ client, products, existingPrices }: Props) {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="flex items-center gap-3 min-w-0">
           <a
             href="/admin?tab=clients"
-            className="text-sm text-gray-500 hover:text-gray-700 transition-colors"
+            className="shrink-0 text-sm text-gray-500 hover:text-gray-700 transition-colors"
           >
             ← Retour
           </a>
-          <div>
-            <h2 className="text-lg font-semibold text-gray-900">
+          <div className="min-w-0">
+            <h2 className="text-lg font-semibold text-gray-900 truncate">
               {client.company_name ?? client.full_name ?? client.email}
             </h2>
-            <p className="text-xs text-gray-400">{client.email}</p>
+            <p className="text-xs text-gray-400 truncate">{client.email}</p>
           </div>
         </div>
         <button
           onClick={handleDeleteClient}
           disabled={deleting}
-          className="px-3 py-1.5 text-sm font-medium text-red-600 border border-red-200 rounded-lg
-                     hover:bg-red-50 disabled:opacity-50 transition-colors whitespace-nowrap"
+          className="self-start sm:self-auto shrink-0 px-3 py-1.5 text-sm font-medium text-red-600
+                     border border-red-200 rounded-lg hover:bg-red-50 disabled:opacity-50 transition-colors"
         >
           {deleting ? 'Suppression…' : 'Supprimer le compte'}
         </button>

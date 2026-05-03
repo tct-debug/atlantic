@@ -70,8 +70,8 @@ export default async function AdminPage({
             <p className="text-xs font-semibold uppercase tracking-widest text-green-700">Atlantic</p>
             <h1 className="text-lg font-bold text-gray-900">Tableau de bord</h1>
           </div>
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-gray-500">{name ?? user.email}</span>
+          <div className="flex items-center gap-3">
+            <span className="hidden sm:inline text-sm text-gray-500 truncate max-w-[180px]">{name ?? user.email}</span>
             <form action="/logout" method="POST">
               <button type="submit" className="text-sm text-gray-500 hover:text-red-600 transition-colors">
                 Déconnexion
