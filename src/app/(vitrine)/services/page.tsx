@@ -1,16 +1,7 @@
 import Link from 'next/link'
-import { Factory, Truck, BookOpen, Handshake, Container, ArrowRight } from 'lucide-react'
+import { Truck, BookOpen, Handshake, Container, ArrowRight } from 'lucide-react'
 
 const SERVICES = [
-  {
-    icon: Factory,
-    title: 'Production',
-    image: null,
-    imageSeed: 'grain-production-factory',
-    description:
-      'Production et stockage de céréales dans nos unités algériennes, avec des contrôles qualité à chaque étape.',
-    points: ['Maïs, orge, blé, soja, coque de soja', 'Contrôle de l\'humidité et de la pureté', 'Stockage en silo selon les normes'],
-  },
   {
     icon: Truck,
     title: 'Logistique',
