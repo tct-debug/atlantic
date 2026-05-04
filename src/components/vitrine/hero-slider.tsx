@@ -16,7 +16,7 @@ import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
 const SLIDES = [
   {
     // Replace with: /images/hero-grain-field.jpg  (wheat / grain field, Algeria)
-    image: '/images/slide.jpg',
+    image: '/images/slide1.jpg',
     label: 'Production · Algérie',
     title: 'Votre partenaire en céréales et produits du soja',
     subtitle:
@@ -26,7 +26,7 @@ const SLIDES = [
   },
   {
     // Replace with: /images/hero-truck-road.jpg  (semi-truck on Algerian highway)
-    image: 'https://picsum.photos/seed/highwaytruck/1920/1080',
+    image: '/images/truck.avif',
     label: 'Logistique · 48 wilayas',
     title: 'Livraison dans toutes les wilayas d\'Algérie',
     subtitle:
@@ -36,7 +36,7 @@ const SLIDES = [
   },
   {
     // Replace with: /images/hero-silo.jpg  (grain silos / storage facility)
-    image: 'https://picsum.photos/seed/grainsilo/1920/1080',
+    image: '/images/silos-a-grain.jpg',
     label: 'Stockage · Qualité certifiée',
     title: 'Des céréales sélectionnées à chaque récolte',
     subtitle:

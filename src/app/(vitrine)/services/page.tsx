@@ -5,8 +5,8 @@ const SERVICES = [
   {
     icon: Factory,
     title: 'Production',
+    image: null,
     imageSeed: 'grain-production-factory',
-    // Replace with: /images/service-production.jpg — inside a grain processing or storage facility
     description:
       'Production et stockage de céréales dans nos unités algériennes, avec des contrôles qualité à chaque étape.',
     points: ['Maïs, orge, blé, soja, coque de soja', 'Contrôle de l\'humidité et de la pureté', 'Stockage en silo selon les normes'],
@@ -14,8 +14,8 @@ const SERVICES = [
   {
     icon: Truck,
     title: 'Logistique',
+    image: '/images/WhatsApp%20Image%202026-05-04%20at%2017.30.17.jpeg',
     imageSeed: 'truck-highway-algeria',
-    // Replace with: /images/service-logistique.jpg — semi-truck on an Algerian highway
     description:
       'Notre propre flotte de camions assure des livraisons fiables dans les 48 wilayas. Vrac ou en sac, grandes et petites quantités.',
     points: ['Livraison sous 24 à 72 h', 'Camions adaptés : vrac, palettes, big-bags', 'Suivi de commande en temps réel'],
@@ -23,8 +23,8 @@ const SERVICES = [
   {
     icon: Container,
     title: 'Distribution',
+    image: '/images/pexels-tomfisk-3245123.jpg',
     imageSeed: 'port-containers-logistics',
-    // Replace with: /images/service-distribution.jpg — containers at an Algerian port (Alger or Oran)
     description:
       'Nous gérons l\'ensemble de la chaîne de distribution, des ports d\'entrée jusqu\'au site de l\'acheteur, sans intermédiaire.',
     points: ['Import depuis les grands ports algériens', 'Réseau de dépôts régionaux', 'Commandes en vrac ou conditionnées'],
@@ -32,8 +32,8 @@ const SERVICES = [
   {
     icon: BookOpen,
     title: 'Qualité & Expertise',
+    image: '/images/processes-oilseedprep-soybeanprep-hero.webp',
     imageSeed: 'grain-quality-lab-analysis',
-    // Replace with: /images/service-qualite.jpg — lab testing, grain sampling, or quality control
     description:
       'Notre équipe vous aide à choisir les produits et les qualités adaptés à vos besoins industriels ou de négoce.',
     points: ['Analyse de la teneur en protéines et humidité', 'Conseil en sourcing et saisonnalité', 'Certificats qualité sur demande'],
@@ -41,8 +41,8 @@ const SERVICES = [
   {
     icon: Handshake,
     title: 'Partenariats',
+    image: '/images/partenariats.png',
     imageSeed: 'business-partnership-handshake',
-    // Replace with: /images/service-partenariats.jpg — business meeting or cooperative scene
     description:
       'Nous travaillons avec les coopératives agricoles, les industriels et les distributeurs régionaux pour garantir un approvisionnement fluide.',
     points: ['Contrats d\'approvisionnement annuels', 'Tarifs préférentiels sur volume', 'Programme de fidélité clients'],
@@ -94,7 +94,7 @@ export default function ServicesPage() {
       {/* Services grid */}
       <section className="max-w-6xl mx-auto px-6 py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {SERVICES.map(({ icon: Icon, title, imageSeed, description, points }) => (
+          {SERVICES.map(({ icon: Icon, title, image, imageSeed, description, points }) => (
             <div
               key={title}
               className="bg-white rounded-xl border border-brand-wheat shadow-sm overflow-hidden"
@@ -103,14 +103,10 @@ export default function ServicesPage() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <div className="h-48 overflow-hidden">
                 <img
-                  src={`https://picsum.photos/seed/${imageSeed}/700/300`}
+                  src={image ?? `https://picsum.photos/seed/${imageSeed}/700/300`}
                   alt=""
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
-                {/*
-                  Replace with: /images/service-{slug}.jpg
-                  See the imageSeed comment above each service for the suggested photo subject
-                */}
               </div>
 
               {/* Card body */}

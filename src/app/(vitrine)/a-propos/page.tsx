@@ -79,7 +79,7 @@ export default function AProposPage() {
         <div className="relative h-80 md:min-h-[420px] rounded-2xl overflow-hidden shadow-md">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="https://picsum.photos/seed/algeria-grain-field/600/500"
+            src="/images/inline-images-800x450-2.jpeg"
             alt=""
             className="absolute inset-0 w-full h-full object-cover"
           />
