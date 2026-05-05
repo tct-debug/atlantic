@@ -4,10 +4,12 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { upsertDailyPrice } from '@/lib/modules/prices/mutations'
 import { priceSchema } from '@/lib/modules/prices/schemas'
+import { getProductImageSrc } from '@/lib/product-images'
 
 type PriceRow = {
   productId: string
   productName: string
+  productSlug: string
   unit: string
   currentPrice: number
   updatedAt: string | null
@@ -106,8 +108,16 @@ export function PriceEditor({ rows }: { rows: PriceRow[] }) {
 
               return (
                 <tr key={row.productId} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-3 sm:px-6 py-3 sm:py-4 font-medium text-gray-900">
-                    {row.productName}
+                  <td className="px-3 sm:px-6 py-3 sm:py-4">
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={getProductImageSrc(row.productSlug)}
+                        alt=""
+                        className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg object-cover flex-shrink-0"
+                      />
+                      <span className="font-medium text-gray-900">{row.productName}</span>
+                    </div>
                   </td>
                   <td className="hidden sm:table-cell px-6 py-4 text-gray-500">{row.unit}</td>
                   <td className="px-3 sm:px-6 py-3 sm:py-4">

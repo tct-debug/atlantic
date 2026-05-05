@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge'
 import type { Product } from '@/lib/modules/products/types'
 import { cn } from '@/lib/utils'
 import { Wheat, Leaf } from 'lucide-react'
+import { getProductImageSrc } from '@/lib/product-images'
 
 const CATEGORY_LABELS: Record<string, string> = {
   cereal: 'Céréales',
@@ -17,22 +18,6 @@ const CATEGORY_ICONS: Record<string, React.ReactNode> = {
 }
 
 const CATEGORY_ORDER = ['cereal', 'soy']
-
-const PRODUCT_LOCAL_IMAGES: Record<string, string> = {
-  'mais':        '/images/produit-mais-grade-2-yellowrock.jpg',
-  'orge':        '/images/orge_brute.jpg',
-  'soja':        '/images/_120708772_fba27772-4c3e-45a8-ba1d-c1bf8031017a.jpg',
-  'coque-soja':  '/images/IMG_0656_TOURTEAU_SOJA2-compressor.webp',
-  'ble-dur':     '/images/ble-header.jpg',
-  'ble-tendre':  '/images/c9654544c4c99da924543a13990d461c-075bf063ec_grains_orge0.webp',
-  'farine-soja': '/images/Farine-de-soja.jpg',
-  'son-ble':     '/images/9568db678de132e5e53850847d38.webp',
-}
-
-function productImageSrc(product: Product): string {
-  if (product.image_url) return product.image_url
-  return PRODUCT_LOCAL_IMAGES[product.slug] ?? `https://picsum.photos/seed/${product.slug}/600/300`
-}
 
 export function ProductGrid({ products }: { products: Product[] }) {
   const categories = CATEGORY_ORDER.filter((c) =>
@@ -85,7 +70,7 @@ export function ProductGrid({ products }: { products: Product[] }) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <div className="h-44 overflow-hidden bg-brand-wheat/40">
               <img
-                src={productImageSrc(product)}
+                src={getProductImageSrc(product.slug, product.image_url)}
                 alt={product.name}
                 className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
               />

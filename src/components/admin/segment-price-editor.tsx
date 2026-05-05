@@ -6,6 +6,7 @@ import { upsertSegmentPrice } from '@/lib/modules/prices/segment-mutations'
 import { priceSchema } from '@/lib/modules/prices/schemas'
 import type { Product } from '@/lib/modules/products/types'
 import type { SegmentPrice } from '@/lib/modules/prices/segment-queries'
+import { getProductImageSrc } from '@/lib/product-images'
 
 const CLIENT_TYPES = [
   { value: 'gros', label: 'Gros' },
@@ -152,10 +153,10 @@ export function SegmentPriceEditor({ products, mode: initMode, segmentValue: ini
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-100 bg-gray-50">
-                <th className="text-left px-6 py-3 font-medium text-gray-600">Produit</th>
-                <th className="text-left px-6 py-3 font-medium text-gray-600">Unité</th>
-                <th className="text-left px-6 py-3 font-medium text-gray-600">Prix segment (DZD)</th>
-                <th className="px-6 py-3"></th>
+                <th className="text-left px-3 sm:px-6 py-3 font-medium text-gray-600">Produit</th>
+                <th className="hidden sm:table-cell text-left px-6 py-3 font-medium text-gray-600">Unité</th>
+                <th className="text-left px-3 sm:px-6 py-3 font-medium text-gray-600">Prix segment (DZD)</th>
+                <th className="px-3 sm:px-6 py-3"></th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
@@ -164,9 +165,19 @@ export function SegmentPriceEditor({ products, mode: initMode, segmentValue: ini
                 const fieldError = errors[product.id]
                 return (
                   <tr key={product.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-6 py-4 font-medium text-gray-900">{product.name}</td>
-                    <td className="px-6 py-4 text-gray-500">{product.unit}</td>
-                    <td className="px-6 py-4">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
+                      <div className="flex items-center gap-2 sm:gap-3">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={getProductImageSrc(product.slug)}
+                          alt=""
+                          className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg object-cover flex-shrink-0"
+                        />
+                        <span className="font-medium text-gray-900">{product.name}</span>
+                      </div>
+                    </td>
+                    <td className="hidden sm:table-cell px-6 py-4 text-gray-500">{product.unit}</td>
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
                       <div className="flex items-center gap-2">
                         <input
                           type="number"
@@ -179,21 +190,21 @@ export function SegmentPriceEditor({ products, mode: initMode, segmentValue: ini
                             setStatuses((prev) => ({ ...prev, [product.id]: 'idle' }))
                             setErrors((prev) => ({ ...prev, [product.id]: '' }))
                           }}
-                          className="w-36 px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
+                          className="w-24 sm:w-36 px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
                         />
                         {fieldError && <span className="text-xs text-red-500">{fieldError}</span>}
                       </div>
                     </td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-3 justify-end">
-                        {status === 'saved' && <span className="text-xs text-green-600 font-medium">✓ Enregistré</span>}
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
+                      <div className="flex items-center gap-2 sm:gap-3 justify-end">
+                        {status === 'saved' && <span className="hidden sm:inline text-xs text-green-600 font-medium">✓ Enregistré</span>}
                         {status === 'error' && !fieldError && <span className="text-xs text-red-500 font-medium">Erreur</span>}
                         <button
                           onClick={() => handleSave(product.id)}
                           disabled={status === 'saving'}
-                          className="px-4 py-1.5 bg-green-700 text-white text-sm font-medium rounded-lg hover:bg-green-800 disabled:opacity-50 transition-colors"
+                          className="px-3 sm:px-4 py-1.5 bg-green-700 text-white text-sm font-medium rounded-lg hover:bg-green-800 disabled:opacity-50 transition-colors whitespace-nowrap"
                         >
-                          {status === 'saving' ? 'Sauvegarde…' : 'Enregistrer'}
+                          {status === 'saving' ? '…' : 'Enregistrer'}
                         </button>
                       </div>
                     </td>

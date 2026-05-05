@@ -1,5 +1,6 @@
 import { requireClient } from '@/lib/auth/guards'
 import { getCustomerPrices } from '@/lib/modules/client-pricing/queries'
+import { getProductImageSrc } from '@/lib/product-images'
 
 function formatPrice(price: number): string {
   return new Intl.NumberFormat('fr-DZ').format(price)
@@ -69,7 +70,17 @@ export default async function PortalPage() {
             <tbody className="divide-y divide-gray-100">
               {prices.map((p) => (
                 <tr key={p.id} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-3 sm:px-6 py-3 sm:py-4 font-medium text-gray-900">{p.product_name}</td>
+                  <td className="px-3 sm:px-6 py-3 sm:py-4">
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={getProductImageSrc(p.product_slug)}
+                        alt=""
+                        className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg object-cover flex-shrink-0"
+                      />
+                      <span className="font-medium text-gray-900">{p.product_name}</span>
+                    </div>
+                  </td>
                   <td className="hidden sm:table-cell px-6 py-4 text-gray-500">{p.unit}</td>
                   <td className="px-3 sm:px-6 py-3 sm:py-4 text-right font-bold text-green-700 text-base">
                     {formatPrice(p.price)}

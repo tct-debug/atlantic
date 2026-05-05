@@ -7,6 +7,7 @@ import { updateClientProfile, deleteClient } from '@/lib/modules/clients/mutatio
 import type { CustomerPriceWithProduct } from '@/lib/modules/client-pricing/types'
 import type { Product } from '@/lib/modules/products/types'
 import type { Client, ClientType } from '@/lib/modules/clients/types'
+import { getProductImageSrc } from '@/lib/product-images'
 
 function fmtUpdatedAt(iso: string): string {
   const d = new Date(iso)
@@ -236,7 +237,17 @@ export function ClientPriceEditor({ client, products, existingPrices }: Props) {
 
                 return (
                   <tr key={product.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-3 sm:px-6 py-3 sm:py-4 font-medium text-gray-900">{product.name}</td>
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
+                      <div className="flex items-center gap-2 sm:gap-3">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={getProductImageSrc(product.slug)}
+                          alt=""
+                          className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg object-cover flex-shrink-0"
+                        />
+                        <span className="font-medium text-gray-900">{product.name}</span>
+                      </div>
+                    </td>
                     <td className="hidden sm:table-cell px-6 py-4 text-gray-500">{product.unit}</td>
                     <td className="px-3 sm:px-6 py-3 sm:py-4">
                       <div className="flex items-center gap-2">

@@ -50,6 +50,7 @@ export default async function AdminPage({
     return {
       productId: p.id,
       productName: p.name,
+      productSlug: p.slug,
       unit: p.unit,
       currentPrice: priceData?.price ?? 0,
       updatedAt: priceData?.updated_at ?? null,
