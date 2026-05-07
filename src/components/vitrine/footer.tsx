@@ -23,7 +23,7 @@ export function Footer() {
         <div>
           <p className="font-serif text-2xl font-bold text-brand-cream mb-1">Atlantic</p>
           <p className="text-xs uppercase tracking-[0.2em] text-brand-gold mb-4 font-sans">
-            Céréales & Soja
+            Transport & Logistique
           </p>
           <p className="text-sm leading-relaxed text-brand-cream/60 max-w-xs">
             Votre partenaire en transport et distribution de céréales et produits du soja,
