@@ -20,6 +20,8 @@ export default async function VitrineLayout({ children }: { children: React.Reac
       unit: p.unit,
       category: p.category,
       updatedAt: priceMap.get(p.id)!.updated_at,
+      slug: p.slug,
+      imageUrl: p.image_url,
     }))
 
   return (

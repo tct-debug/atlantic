@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { TrendingUp, ChevronRight, ChevronLeft, X, ArrowRight } from 'lucide-react'
+import { getProductImageSrc } from '@/lib/product-images'
 
 export type PriceItem = {
   productName: string
@@ -9,6 +10,8 @@ export type PriceItem = {
   unit: string
   category: string
   updatedAt: string
+  slug: string
+  imageUrl?: string | null
 }
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -156,20 +159,33 @@ export function PriceSidebar({ items }: { items: PriceItem[] }) {
                     {CATEGORY_LABELS[cat] ?? cat}
                   </p>
                   <div className="space-y-3">
-                    {catItems.map(({ productName, price, unit, updatedAt }) => (
-                      <div key={productName}>
-                        <p className="text-[10px] font-sans leading-none mb-0.5" style={{ color: 'rgba(255,255,255,0.45)' }}>
-                          {productName}
-                        </p>
-                        <p className="font-serif text-sm font-bold leading-none text-white">
-                          {fmt(price)}
-                          <span className="text-[9px] font-sans font-normal ml-1" style={{ color: 'rgba(255,255,255,0.25)' }}>
-                            DZD/{unit}
-                          </span>
-                        </p>
-                        <p className="text-[9px] font-sans mt-0.5" style={{ color: 'rgba(255,255,255,0.2)' }}>
-                          {fmtTime(updatedAt)}
-                        </p>
+                    {catItems.map(({ productName, price, unit, updatedAt, slug, imageUrl }) => (
+                      <div key={productName} className="flex items-center gap-2">
+                        <div
+                          className="w-7 h-7 rounded-md overflow-hidden flex-shrink-0"
+                          style={{ background: 'rgba(255,255,255,0.08)' }}
+                        >
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={getProductImageSrc(slug, imageUrl)}
+                            alt=""
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-[10px] font-sans leading-none mb-0.5 truncate" style={{ color: 'rgba(255,255,255,0.45)' }}>
+                            {productName}
+                          </p>
+                          <p className="font-serif text-sm font-bold leading-none text-white">
+                            {fmt(price)}
+                            <span className="text-[9px] font-sans font-normal ml-1" style={{ color: 'rgba(255,255,255,0.25)' }}>
+                              DZD/{unit}
+                            </span>
+                          </p>
+                          <p className="text-[9px] font-sans mt-0.5" style={{ color: 'rgba(255,255,255,0.2)' }}>
+                            {fmtTime(updatedAt)}
+                          </p>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -321,25 +337,38 @@ export function PriceSidebar({ items }: { items: PriceItem[] }) {
                 {CATEGORY_LABELS[cat] ?? cat}
               </p>
               <div className="space-y-1">
-                {catItems.map(({ productName, price, unit, updatedAt }) => (
+                {catItems.map(({ productName, price, unit, updatedAt, slug, imageUrl }) => (
                   <div
                     key={productName}
-                    className="flex items-center justify-between py-3.5"
+                    className="flex items-center gap-3 py-3.5"
                     style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}
                   >
-                    <div>
-                      <p className="text-white font-sans text-sm font-medium">{productName}</p>
-                      <p className="text-[10px] font-sans mt-0.5" style={{ color: 'rgba(255,255,255,0.3)' }}>
-                        Mis à jour {fmtTime(updatedAt)}
-                      </p>
+                    <div
+                      className="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0"
+                      style={{ background: 'rgba(255,255,255,0.08)' }}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={getProductImageSrc(slug, imageUrl)}
+                        alt=""
+                        className="w-full h-full object-cover"
+                      />
                     </div>
-                    <div className="text-right">
-                      <p className="font-serif text-lg font-bold" style={{ color: '#c9a961' }}>
-                        {fmt(price)}
-                      </p>
-                      <p className="text-[10px] font-sans" style={{ color: 'rgba(255,255,255,0.3)' }}>
-                        DZD / {unit}
-                      </p>
+                    <div className="flex-1 flex items-center justify-between min-w-0">
+                      <div className="min-w-0 pr-2">
+                        <p className="text-white font-sans text-sm font-medium truncate">{productName}</p>
+                        <p className="text-[10px] font-sans mt-0.5" style={{ color: 'rgba(255,255,255,0.3)' }}>
+                          Mis à jour {fmtTime(updatedAt)}
+                        </p>
+                      </div>
+                      <div className="text-right flex-shrink-0">
+                        <p className="font-serif text-lg font-bold" style={{ color: '#c9a961' }}>
+                          {fmt(price)}
+                        </p>
+                        <p className="text-[10px] font-sans" style={{ color: 'rgba(255,255,255,0.3)' }}>
+                          DZD / {unit}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 ))}

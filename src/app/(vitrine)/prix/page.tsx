@@ -1,5 +1,6 @@
 import { getActiveProducts } from '@/lib/modules/products/queries'
 import { getCurrentPrices } from '@/lib/modules/prices/queries'
+import { getProductImageSrc } from '@/lib/product-images'
 import { Info } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
 
@@ -99,15 +100,25 @@ export default async function PrixPage() {
 
                       return (
                         <tr key={product.id} className="hover:bg-brand-cream/50 transition-colors">
-                          <td className="px-6 py-5">
-                            <span className="font-serif font-semibold text-brand-charcoal">
-                              {product.name}
-                            </span>
+                          <td className="px-4 py-4 sm:px-6 sm:py-5">
+                            <div className="flex items-center gap-3">
+                              <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 bg-brand-wheat/40">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                  src={getProductImageSrc(product.slug, product.image_url)}
+                                  alt=""
+                                  className="w-full h-full object-cover"
+                                />
+                              </div>
+                              <span className="font-serif font-semibold text-brand-charcoal">
+                                {product.name}
+                              </span>
+                            </div>
                           </td>
-                          <td className="px-6 py-5 text-brand-charcoal/50 font-sans">
+                          <td className="px-4 py-4 sm:px-6 sm:py-5 text-brand-charcoal/50 font-sans">
                             {product.unit}
                           </td>
-                          <td className="px-6 py-5 text-right">
+                          <td className="px-4 py-4 sm:px-6 sm:py-5 text-right">
                             {priceData ? (
                               <span className="font-serif text-xl font-bold text-brand-green">
                                 {formatPrice(priceData.price)}
@@ -118,7 +129,7 @@ export default async function PrixPage() {
                               </span>
                             )}
                           </td>
-                          <td className="px-6 py-5 text-right text-brand-charcoal/40 text-xs font-sans hidden sm:table-cell">
+                          <td className="px-4 py-4 sm:px-6 sm:py-5 text-right text-brand-charcoal/40 text-xs font-sans hidden sm:table-cell">
                             {priceData ? formatDate(priceData.effective_date) : '—'}
                           </td>
                         </tr>
