@@ -54,7 +54,7 @@ const ORDER_STEPS = [
   {
     step: '03',
     title: 'Confirmation',
-    body: 'Vous validez la commande. Nous planifions la production et la logistique.',
+    body: 'Vous validez la commande. Nous planifions l\'expédition et la logistique.',
   },
   {
     step: '04',
@@ -76,7 +76,7 @@ export default function ServicesPage() {
             Nos services
           </h1>
           <p className="text-white/60 max-w-xl font-sans">
-            De la production à la livraison, Atlantic couvre l&apos;ensemble de la chaîne de valeur
+            Du sourcing à la livraison, Atlantic couvre l&apos;ensemble de la chaîne logistique
             pour les acheteurs algériens.
           </p>
         </div>

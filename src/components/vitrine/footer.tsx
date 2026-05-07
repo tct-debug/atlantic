@@ -26,8 +26,8 @@ export function Footer() {
             Céréales & Soja
           </p>
           <p className="text-sm leading-relaxed text-brand-cream/60 max-w-xs">
-            Votre partenaire en céréales et produits du soja. Production et distribution
-            à travers toute l&apos;Algérie.
+            Votre partenaire en transport et distribution de céréales et produits du soja,
+            partout en Algérie.
           </p>
         </div>
 

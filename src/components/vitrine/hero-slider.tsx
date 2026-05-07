@@ -17,10 +17,10 @@ const SLIDES = [
   {
     // Replace with: /images/hero-grain-field.jpg  (wheat / grain field, Algeria)
     image: '/images/slide1.jpg',
-    label: 'Production · Algérie',
+    label: 'Négoce · Algérie',
     title: 'Votre partenaire en céréales et produits du soja',
     subtitle:
-      'Atlantic produit et distribue des céréales et produits du soja de qualité supérieure. Prix mis à jour chaque matin.',
+      'Atlantic distribue des céréales et produits du soja de qualité supérieure. Prix mis à jour chaque matin.',
     cta: { label: 'Voir les prix du jour', href: '/prix' },
     cta2: { label: 'Nous contacter', href: '/contact' },
   },
@@ -37,10 +37,10 @@ const SLIDES = [
   {
     // Replace with: /images/hero-silo.jpg  (grain silos / storage facility)
     image: '/images/silos-a-grain.jpg',
-    label: 'Stockage · Qualité certifiée',
-    title: 'Des céréales sélectionnées à chaque récolte',
+    label: 'Qualité · Sélection rigoureuse',
+    title: 'Des céréales rigoureusement sélectionnées à la source',
     subtitle:
-      'Maïs, orge, blé, soja, coque de soja — contrôle qualité rigoureux à chaque étape : humidité, pureté, teneur en protéines.',
+      'Maïs, orge, blé, soja, coque de soja — chaque lot est vérifié à la réception : humidité, pureté, teneur en protéines.',
     cta: { label: 'Voir nos produits', href: '/produits' },
     cta2: { label: 'En savoir plus', href: '/a-propos' },
   },

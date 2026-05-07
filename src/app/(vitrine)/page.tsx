@@ -12,6 +12,7 @@ import {
   Store,
   Building2,
   Ship,
+  Warehouse,
 } from 'lucide-react'
 import { getActiveProducts } from '@/lib/modules/products/queries'
 import { getCurrentPrices } from '@/lib/modules/prices/queries'
@@ -42,9 +43,9 @@ const CATEGORY_ICONS: Record<string, React.ReactNode> = {
 
 const SERVICES = [
   {
-    icon: Factory,
-    title: 'Production',
-    desc: 'Sélection et stockage de céréales dans nos unités algériennes avec contrôle qualité à chaque étape.',
+    icon: Warehouse,
+    title: 'Approvisionnement',
+    desc: 'Sélection et approvisionnement de céréales et produits du soja auprès de nos partenaires, avec contrôle qualité à la réception.',
   },
   {
     icon: Truck,
@@ -77,7 +78,7 @@ const OUR_SUPPLIERS = [
 ]
 
 const ABOUT_POINTS = [
-  'Production et sélection de céréales et produits du soja de qualité',
+  'Négoce et distribution de céréales et produits du soja de qualité',
   'Approvisionnement fiable en maïs, orge, blé, soja et coque de soja',
   'Livraison rapide dans toutes les wilayas d\'Algérie',
   'Tarifs mis à jour chaque jour pour une totale transparence',

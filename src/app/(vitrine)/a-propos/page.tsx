@@ -19,7 +19,7 @@ const VALUES = [
   {
     icon: Leaf,
     title: 'Durabilité',
-    body: 'Engagés pour une agriculture algérienne durable, nous privilégions les pratiques respectueuses de l\'environnement et des ressources naturelles.',
+    body: 'Engagés pour une logistique responsable, nous privilégions des circuits courts et des partenariats durables avec nos fournisseurs locaux.',
   },
 ]
 
@@ -139,7 +139,7 @@ export default function AProposPage() {
         <div className="absolute inset-0 bg-brand-charcoal/40" />
         <div className="absolute inset-0 flex items-center justify-center">
           <p className="font-serif text-2xl md:text-3xl font-bold text-white text-center px-6">
-            Des installations modernes au service de la qualité
+            Un réseau logistique moderne au service de vos approvisionnements
           </p>
         </div>
       </div>
