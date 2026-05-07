@@ -27,7 +27,7 @@ export const revalidate = 60
 const TRUST_STATS = [
   { value: '15+', label: 'Années d\'expérience' },
   { value: '100%', label: 'Produits algériens' },
-  { value: '48', label: 'Wilayas desservies' },
+  { value: '58', label: 'Wilayas desservies' },
   { value: '500+', label: 'Clients fidèles' },
 ]
 
